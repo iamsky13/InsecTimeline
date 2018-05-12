@@ -28,7 +28,7 @@ namespace InsecTimeLine.Models
         public string NepMonth { get; set; }
         public List<EventDateInfoModel> GetEvents()
         {
-            var db = new insectimelineContext();
+            var db = new InsecTimelineContext();
             var x = (from eventData in db.Events
                 join time in db.Timeline on eventData.Id equals time.EventRefId
                 select new EventDateInfoModel

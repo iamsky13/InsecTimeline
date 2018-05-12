@@ -14,3 +14,6 @@
 /InsecTimeLine/bin/Debug/netcoreapp2.0/InsecTimeLine.pdb
 /InsecTimeLine/bin/Debug/netcoreapp2.0/InsecTimeLine.runtimeconfig.dev.json
 /InsecTimeLine/bin/Debug/netcoreapp2.0/InsecTimeLine.runtimeconfig.json
+.vs/*
+/InsecTimeLine/appsettings.Development.json
+/InsecTimeLine/wwwroot/Uploads/*

@@ -1,0 +1,20 @@
+﻿@model EventFormViewModel
+@{
+    
+    ViewData["Title"] = "New Event";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+
+<div>
+    <form asp-action="Create" asp-controller="Event" method="post" enctype="multipart/form-data">
+        <input asp-for="Title"/>
+        <input asp-for="Description"/>
+        <input asp-for="EnglishDate" type="date"/>
+        <input asp-for="Image" accept="image/*"/>
+        <input asp-for="Link"/>
+        <input asp-for="NepaliDate"/>
+        <input type="submit" name="submit" value="submit" />
+    </form>
+</div>
