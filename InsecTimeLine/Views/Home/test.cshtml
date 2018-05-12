@@ -1,4 +1,4 @@
-﻿
+﻿@model List<EventDateInfoModel>
 @{
     Layout = null;
 }
@@ -563,79 +563,101 @@
                             </a>
                         </div>
                     </div>
+                    @for(var i =0;i<Model.Count;i=i+2)
+                    {
                     <div class="row timeline-movement">
+                            <div class="timeline-badge">
+                                <span class="timeline-balloon-date-day">@Model[i].Event.DateNep.Split('-')[2]</span>
+                                <span class="timeline-balloon-date-month">@Model[i].NepMonth</span>
+                            </div>
+                            @for (var j = 0; j < Model[i].Timelines.Count; j = j + 2)
+                            {
+                                <div class="col-sm-6  timeline-item">
+                                    <div class="row">
+                                        <div class="col-sm-11">
+                                            <div class="timeline-panel credits">
+                                                <ul class="timeline-panel-ul">
+                                                    <li><span class="importo">@Model[i].Timelines[j].Title</span></li>
+                                                    <li><span class="causale">@Model[i].Timelines[j].Description</span> </li>
+                                                    <li>
+                                                        <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>@Model[i].Event.DateNep @Model[i].Event.DateEng</small></p> </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                if (Model[i].Timelines.Count % 2==0)
+                                 {
+                                     <div class="col-sm-6  timeline-item">
+                                         <div class="row">
+                                             <div class="col-sm-offset-1 col-sm-11">
+                                                 <div class="timeline-panel debits">
+                                                     <ul class="timeline-panel-ul">
+                                                         <li><span class="importo">>@Model[i].Timelines[j + 1].Title</span></li>
+                                                         <li><span class="causale">@Model[i].Timelines[j + 1].Description</span> </li>
+                                                         <li>
+                                                             <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> @Model[i].Event.DateNep @Model[i].Event.DateEng</small></p> </li>
+                                                     </ul>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 }
+                            }
+                        </div>
+                        if (Model.Count % 2 == 0)
+                        {
+                            
+                            <!--due -->
+                            <div class="row timeline-movement">
+
+                                <div class="timeline-badge">
+                                    <span class="timeline-balloon-date-day">@Model[i + 1].Event.DateNep.Split('-')[2]</span>
+                                    <span class="timeline-balloon-date-month">@Model[i + 1].NepMonth</span>
+                                </div>
+                                @for (var j = 0; j < Model[i+1].Timelines.Count; j = j + 2)
+                                {
+                                    <div class="col-sm-offset-6 col-sm-6  timeline-item">
+                                        <div class="row">
+                                            <div class="col-sm-offset-1 col-sm-11">
+                                                <div class="timeline-panel debits">
+                                                    <ul class="timeline-panel-ul">
+                                                        <li><span class="importo">@Model[i+1].Timelines[j].Title</span></li>
+                                                        <li><span class="causale">@Model[i+1].Timelines[j].Description</span> </li>
+                                                        <li><span class="causale"><img src="@Model[i+1].Timelines[j].ImageLink" height="360px" width="460px"></span> </li>
+                                                        <li>
+                                                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> @Model[i+1].Event.DateNep @Model[i+1].Event.DateEng</small></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    if (Model[i+1].Timelines.Count % 2 == 0)
+                                    {
+                                        <div class="col-sm-6  timeline-item">
+                                            <div class="row">
+                                                <div class="col-sm-11">
+                                                    <div class="timeline-panel credits">
+                                                        <ul class="timeline-panel-ul">
+                                                            <li><span class="importo">@Model[i + 1].Timelines[j + 1].Title</span></li>
+                                                            <li><span class="causale">@Model[i + 1].Timelines[j + 1].Description</span> </li>
+                                                            <li>
+                                                                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> @Model[i + 1].Event.DateNep @Model[i + 1].Event.DateEng</small></p> </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    @*<div class="row timeline-movement">
+
                         <div class="timeline-badge">
-                            <span class="timeline-balloon-date-day">18</span>
-                            <span class="timeline-balloon-date-month">Baisakh</span>
-                        </div>
-
-                        <div class="col-sm-6  timeline-item">
-                            <div class="row">
-                                <div class="col-sm-11">
-                                    <div class="timeline-panel credits">
-                                        <ul class="timeline-panel-ul">
-                                            <li><span class="importo">RS31345_Nagarik News - पिसिएको मधेस(pdf)</span></li>
-                                            <li><span class="causale">State Responsibility for 37 killings during protests in terai</span> </li>
-                                            <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 18/01/2060</small></p> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6  timeline-item">
-                            <div class="row">
-                                <div class="col-sm-offset-1 col-sm-11">
-                                    <div class="timeline-panel debits">
-                                        <ul class="timeline-panel-ul">
-                                            <li><span class="importo">RS15413_मधेशी मोर्चाले औषधि लोड गरेको ट्रकमा आगो लगायो(pdf)</span></li>
-                                            <li><span class="causale">चालक रहेकै अवस्थामा आगो लगाईयो(article)</span> </li>
-                                            <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11/09/2064</small></p> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--due -->
-                    <div class="row timeline-movement">
-
-                        <div class="timeline-badge">
-                            <span class="timeline-balloon-date-day">13</span>
-                            <span class="timeline-balloon-date-month">Jestha</span>
-                        </div>
-                        <div class="col-sm-offset-6 col-sm-6  timeline-item">
-                            <div class="row">
-                                <div class="col-sm-offset-1 col-sm-11">
-                                    <div class="timeline-panel debits">
-                                        <ul class="timeline-panel-ul">
-                                            <li><span class="importo">Image</span></li>
-                                            <li><span class="causale"><img src="a.jpg" height="360px" width="460px"></span> </li>
-                                            <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11/09/2064</small></p> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6  timeline-item">
-                            <div class="row">
-                                <div class="col-sm-11">
-                                    <div class="timeline-panel credits">
-                                        <ul class="timeline-panel-ul">
-                                            <li><span class="importo">RS31345_Nagarik News - पिसिएको मधेस(pdf)</span></li>
-                                            <li><span class="causale">State Responsibility for 37 killings during protests in terai</span> </li>
-                                            <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11/09/2074</small></p> </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row timeline-movement">
-
-                        <div class="timeline-badge">
-                            <span class="timeline-balloon-date-day">10</span>
-                            <span class="timeline-balloon-date-month">Asar</span>
+                            <span class="timeline-balloon-date-day">@Model[i + 2].Event.DateNep.Split('-')[2]</span>
+                            <span class="timeline-balloon-date-month">@Model[i+2].NepMonth</span>
                         </div>
                         <div class="col-sm-offset-6 col-sm-6  timeline-item">
                             <div class="row">
@@ -664,7 +686,8 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div>*@
+                    }
                 </div>
 
                 <div class="page-header">

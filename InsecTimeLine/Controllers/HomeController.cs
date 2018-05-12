@@ -33,7 +33,7 @@ namespace InsecTimeLine.Controllers
         {
             var m = new EventDateInfoModel();
             var res = m.GetEvents();
-            return View();
+            return View(res);
         }
 
         public IActionResult Error()
