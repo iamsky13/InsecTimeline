@@ -4,18 +4,23 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace InsecTimeLine.Models
 {
-    public partial class insectimelineContext : DbContext
+    public partial class InsecTimelineContext : DbContext
     {
         public virtual DbSet<Events> Events { get; set; }
         public virtual DbSet<Timeline> Timeline { get; set; }
+        public static string ConnectionString { get; set; }
+
+        public InsecTimelineContext(DbContextOptions<InsecTimelineContext> options) : base(options)
+        {
+        }
+
+        public InsecTimelineContext()
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Server=.;Database=insectimeline;Trusted_Connection=True;");
-            }
+            optionsBuilder.UseSqlServer(ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
