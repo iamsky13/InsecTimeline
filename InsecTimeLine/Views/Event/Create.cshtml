@@ -1,20 +1,61 @@
 ﻿@model EventFormViewModel
 @{
-    
+
     ViewData["Title"] = "New Event";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
-
-
+<link href="~/css/nepali.datepicker.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/js/nepali.datepicker.min.js"></script>
 <div>
     <form asp-action="Create" asp-controller="Event" method="post" enctype="multipart/form-data">
-        <input asp-for="Title"/>
-        <input asp-for="Description"/>
-        <input asp-for="EnglishDate" type="date"/>
-        <input asp-for="Image" accept="image/*"/>
-        <input asp-for="Link"/>
-        <input asp-for="NepaliDate"/>
-        <input type="submit" name="submit" value="submit" />
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control"/>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control"/>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image"></label>
+            <input asp-for="Image" accept="image/*"/>
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Link"></label>
+            <input asp-for="Link" class="form-control" autocomplete="off"/>
+            <span asp-validation-for="Link" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EnglishDate"></label>
+            <input asp-for="EnglishDate" type="text" placeholder="" class="form-control" id="english-date" autocomplete="off" readonly/>
+            <span asp-validation-for="EnglishDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NepaliDate"></label>
+            <input asp-for="NepaliDate" class="form-control" id="nepali-date" autocomplete="off" readonly/>
+            <span asp-validation-for="NepaliDate" class="text-danger"></span>
+        </div>
+        <input type="submit" name="submit" value="Create" class="btn btn-primary btn-lg pull-right"/>
     </form>
+
+    <script>
+        $('#nepali-date').nepaliDatePicker({
+            ndpEnglishInput: 'english-date'
+        });
+        $('#english-date').change(function () {
+            $('#nepali-date').val(AD2BS($('#english-date').val()));
+        });
+        $("#english-date").datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+    </script>
 </div>
+
+@await Html.PartialAsync("_ValidationScriptsPartial")
